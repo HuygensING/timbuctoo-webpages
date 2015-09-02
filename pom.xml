@@ -8,4 +8,77 @@
   <description>Contains the test pages for Timbuctoo</description>
   <packaging>war</packaging>
 
+  <organization>
+    <name>Huygens ING</name>
+    <url>http://www.huygens.knaw.nl/</url>
+  </organization>
+  <inceptionYear>2012</inceptionYear>
+
+  <developers>
+    <developer>
+      <id>RD</id>
+      <name>Ronald Haentjens Dekker</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>MM</id>
+      <name>Martijn Maas</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>WR</id>
+      <name>Walter Ravenek</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+  </developers>
+
+  <distributionManagement>
+    <repository>
+      <id>maven.huygens</id>
+      <name>Huygens Maven Repository</name>
+      <url>${huygens-repo}</url>
+    </repository>
+    <!-- use the following if you ARE using a snapshot version. -->
+    <snapshotRepository>
+      <id>maven.huygens</id>
+      <name>Huygens Maven Repository</name>
+      <url>${huygens-repo}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- plugin properties -->
+    <license-plugin.version>1.5</license-plugin.version>
+    <wagon-ssh.version>2.2</wagon-ssh.version>
+  </properties>
+  
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>${wagon-ssh.version}</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>${license-plugin.version}</version>
+        <configuration>
+          <licenseName>gpl_v3</licenseName>
+          <sectionDelimiter>=======</sectionDelimiter>
+          <canUpdateCopyright>true</canUpdateCopyright>
+          <canUpdateDescription>true</canUpdateDescription>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
