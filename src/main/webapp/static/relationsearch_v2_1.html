@@ -56,32 +56,26 @@
     </table>
     <p><a href="javascript:void(0);" onclick="doPost1()">Submit query</a></p>
 
-    <h2>Target Query</h2>
-    <table>
-        <tr>
-            <td>Collection</td>
-            <td><input name="" type="text" size="50" id="searchcollection2"/></td>
-        </tr>
-        <tr>
-            <td>Text</td>
-            <td><input name="" type="text" size="50" id="searchtext2"/></td>
-        </tr>
-    </table>
-    <p><a href="javascript:void(0);" onclick="doPost2()">Submit query</a></p>
-
     <h2>Relation Query</h2>
     <table>
-        <!--<tr>-->
-            <!--<td>Relation types</td>-->
-            <!--<td><select multiple id="relation_types"></select></td>-->
-        <!--</tr>-->
+        <tr>
+            <td>Target Query</td>
+            <td>
+                <table>
+                    <tr>
+                        <td>Collection</td>
+                        <td><input name="" type="text" size="50" id="searchcollection2"/></td>
+                    </tr>
+                    <tr>
+                        <td>Text</td>
+                        <td><input name="" type="text" size="50" id="searchtext2"/></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
         <tr>
             <td>Source Query</td>
             <td><input name="" type="text" size="50" id="searchid1"/></td>
-        </tr>
-        <tr>
-            <td>Target Query</td>
-            <td><input name="" type="text" size="50" id="searchid2"/></td>
         </tr>
     </table>
     <p><a href="javascript:void(0);" onclick="doPost3()">Submit query</a></p>
@@ -149,41 +143,15 @@
     });
   }
 
-  function doPost2() {
-  var errorToken = $('#error');
-    jQuery.ajax({
-      url: searchUrl + $('#searchcollection2').val(),
-      type: 'POST',
-      data: JSON.stringify({
-        'term': $('#searchtext2').val(),
-      }),
-      headers : { 
-        VRE_ID : $('#vreselect').val()
-      },
-      contentType: 'application/json; charset=utf-8',
-      success: function (data, status, xhr) {
-        var queryURL = xhr.getResponseHeader('Location') || 'None';
-        var n = queryURL.lastIndexOf('/');
-        $('#searchid2').val(queryURL.substring(n + 1));
-        errorToken.hide();
-      },
-      error: function (xhr, status, errorThrown) {
-       errorToken.text(status + ' : ' + errorThrown);
-       errorToken.show();
-      }
-    });
-  }
 
   function doPost3() {
   var errorToken = $('#error');
     jQuery.ajax({
-      url: searchUrl + "wwrelations",
+      url: searchUrl + "wwrelations/"+$('#searchcollection2').val(),
       type: 'POST',
       data: JSON.stringify({
-        'typeString': 'wwrelation',
-        'sourceSearchId': $('#searchid1').val(),
-        'targetSearchId': $('#searchid2').val(),
-        'relationTypeIds': getRelationTypes()
+        'term': $('#searchtext2').val(),
+        'otherSearchId': $('#searchid1').val(),
       }),
       headers : { 
         VRE_ID : $('#vreselect').val()
