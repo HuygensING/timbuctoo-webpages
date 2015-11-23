@@ -199,6 +199,9 @@ text {
       url: baseUrl + 'graph/' + path,
       type: 'GET',
       data: {'depth': depth},
+      headers : {
+        VRE_ID : $('#vreselect').val()
+      },
       contentType: 'application/json; charset=utf-8',
       success: function (json) {
 

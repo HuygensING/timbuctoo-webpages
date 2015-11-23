@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>nl.knaw.huygens</groupId>
   <artifactId>timbuctoo-webpages</artifactId>
-  <version>3.1.0</version>
+  <version>3.2.0</version>
   
   <name>Timbuctoo web pages</name>
   <description>Contains the test pages for Timbuctoo</description>
